@@ -1,0 +1,314 @@
+'use client'
+
+import * as Clerk from '@clerk/elements/common'
+import * as SignIn from '@clerk/elements/sign-in'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Icons } from '@/components/ui/icons'
+import { useState, useEffect } from 'react'
+
+export default function SignInPage() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [focusedField, setFocusedField] = useState(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  
+  // Handle mouse movement for parallax effect
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width
+    const y = (e.clientY - rect.top) / rect.height
+    setMousePosition({ x, y })
+  }
+
+  return (
+    <section className="relative">
+      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+        {/* Left Section - Enhanced Hero/Brand */}
+        <section 
+          className="relative flex h-32 items-end bg-emerald-950 lg:col-span-5 lg:h-full xl:col-span-6 overflow-hidden"
+          onMouseMove={handleMouseMove}
+        >
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            {/* Gradient overlay */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 to-emerald-950/80"
+              style={{
+                transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`,
+                transition: 'transform 0.2s ease-out'
+              }}
+            />
+            
+            {/* Floating particles */}
+            <div className="absolute -inset-[100%] opacity-50">
+              {[...Array(30)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute h-1 w-1 rounded-full animate-float"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    animationDuration: `${5 + Math.random() * 5}s`,
+                    backgroundColor: i % 2 === 0 ? '#34D399' : '#059669',
+                    boxShadow: `0 0 ${10 + Math.random() * 20}px ${i % 2 === 0 ? '#34D399' : '#059669'}`
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Animated geometric shapes */}
+            <div className="absolute inset-0">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={`shape-${i}`}
+                  className="absolute animate-spin-slow"
+                  style={{
+                    left: `${20 + Math.random() * 60}%`,
+                    top: `${20 + Math.random() * 60}%`,
+                    transform: `rotate(${Math.random() * 360}deg)`,
+                    animationDuration: `${20 + Math.random() * 20}s`,
+                    animationDelay: `${Math.random() * -20}s`
+                  }}
+                >
+                  <svg width="40" height="40" viewBox="0 0 40 40" className="opacity-20">
+                    <path
+                      d="M20 0 L40 20 L20 40 L0 20 Z"
+                      fill="none"
+                      stroke="#34D399"
+                      strokeWidth="1"
+                      className="animate-pulse"
+                      style={{ animationDelay: `${Math.random() * -5}s` }}
+                    />
+                  </svg>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative hidden w-full lg:block lg:p-12">
+            <div className="relative">
+              {/* Animated logo */}
+              <div 
+                className="relative mx-auto size-16 cursor-pointer"
+                style={{
+                  transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)`,
+                  transition: 'transform 0.2s ease-out'
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 40 40"
+                  className="absolute transition-all duration-500 hover:rotate-180 hover:scale-110"
+                >
+                  <mask id="a" width="40" height="40" x="0" y="0" maskUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+                  </mask>
+                  <g fill="#34D399" mask="url(#a)" className="animate-pulse">
+                    <path d="M43.5 3a.5.5 0 0 0 0-1v1Zm0-1h-46v1h46V2ZM43.5 8a.5.5 0 0 0 0-1v1Zm0-1h-46v1h46V7Z" />
+                    <path d="M27 3.5a1 1 0 1 0 0-2v2Zm0-2h-46v2h46v-2ZM25 8.5a1 1 0 1 0 0-2v2Zm0-2h-46v2h46v-2Z" />
+                  </g>
+                </svg>
+              </div>
+
+              {/* Welcome text with parallax effect */}
+              <div 
+                style={{
+                  transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)`,
+                  transition: 'transform 0.2s ease-out'
+                }}
+              >
+                <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-200 to-emerald-400 animate-gradient">
+                  Welcome Back 👋
+                </h2>
+
+                <p className="mt-4 leading-relaxed text-white/90 max-w-md">
+                  Sign in to access your account and continue your journey with us.
+                  We're excited to have you back!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Right Section remains the same */}
+        <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 bg-gradient-to-b from-black to-emerald-950">
+          {/* ... existing right section code ... */}
+          <div className="max-w-xl lg:max-w-3xl w-full">
+            <SignIn.Root>
+              <Clerk.Loading>
+                {(isGlobalLoading) => (
+                  <SignIn.Step name="start">
+                    <Card className="w-full sm:w-96 mx-auto bg-emerald-950/40 backdrop-blur-xl border-white/10">
+                      <CardHeader>
+                        <CardTitle className="text-white">Sign in to continue</CardTitle>
+                        <CardDescription className="text-white/70">
+                          Welcome back! Please sign in to continue
+                        </CardDescription>
+                      </CardHeader>
+                      
+                      <CardContent className="grid gap-y-4">
+                        <div className="grid grid-cols-2 gap-x-4">
+                          <Clerk.Connection name="github" asChild>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              type="button"
+                              disabled={isGlobalLoading}
+                              className="bg-transparent text-white border-white/20 hover:bg-white/10"
+                            >
+                              <Clerk.Loading scope="provider:github">
+                                {(isLoading) =>
+                                  isLoading ? (
+                                    <Icons.spinner className="size-4 animate-spin" />
+                                  ) : (
+                                    <>
+                                      <Icons.gitHub className="mr-2 size-4" />
+                                      GitHub
+                                    </>
+                                  )
+                                }
+                              </Clerk.Loading>
+                            </Button>
+                          </Clerk.Connection>
+                          
+                          <Clerk.Connection name="google" asChild>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              type="button"
+                              disabled={isGlobalLoading}
+                              className="bg-transparent text-white border-white/20 hover:bg-white/10"
+                            >
+                              <Clerk.Loading scope="provider:google">
+                                {(isLoading) =>
+                                  isLoading ? (
+                                    <Icons.spinner className="size-4 animate-spin" />
+                                  ) : (
+                                    <>
+                                      <Icons.google className="mr-2 size-4" />
+                                      Google
+                                    </>
+                                  )
+                                }
+                              </Clerk.Loading>
+                            </Button>
+                          </Clerk.Connection>
+                        </div>
+
+                        <p className="flex items-center gap-x-3 text-sm text-white/60 before:h-px before:flex-1 before:bg-white/20 after:h-px after:flex-1 after:bg-white/20">
+                          or continue with email
+                        </p>
+
+                        <Clerk.Field 
+                          name="identifier" 
+                          className={`space-y-2 transition-transform duration-300 ${
+                            focusedField === 'identifier' ? 'scale-[1.02]' : ''
+                          }`}
+                        >
+                          <Clerk.Label asChild>
+                            <Label className="text-white">Email address</Label>
+                          </Clerk.Label>
+                          <Clerk.Input 
+                            type="email" 
+                            required 
+                            onFocus={() => setFocusedField('identifier')}
+                            onBlur={() => setFocusedField(null)}
+                            asChild
+                          >
+                            <Input className="bg-transparent text-white border-white/20 focus:border-emerald-400 transition-all duration-300" />
+                          </Clerk.Input>
+                          <Clerk.FieldError className="block text-sm text-rose-400" />
+                        </Clerk.Field>
+                      </CardContent>
+
+                      <CardFooter>
+                        <div className="grid w-full gap-y-4">
+                          <SignIn.Action submit asChild>
+                            <Button 
+                              disabled={isGlobalLoading}
+                              className="bg-gradient-to-b from-emerald-400 to-emerald-500 text-emerald-950 hover:from-emerald-300 hover:to-emerald-400 transition-all duration-300"
+                            >
+                              <Clerk.Loading>
+                                {(isLoading) => {
+                                  return isLoading ? (
+                                    <Icons.spinner className="size-4 animate-spin" />
+                                  ) : (
+                                    'Continue'
+                                  )
+                                }}
+                              </Clerk.Loading>
+                            </Button>
+                          </SignIn.Action>
+
+                          <Button 
+                            variant="link" 
+                            size="sm" 
+                            asChild
+                            className="text-white hover:text-emerald-400"
+                          >
+                            <Clerk.Link navigate="sign-up">
+                              Don&apos;t have an account? Sign up
+                            </Clerk.Link>
+                          </Button>
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </SignIn.Step>
+                )}
+              </Clerk.Loading>
+            </SignIn.Root>
+          </div>
+        </main>
+      </div>
+
+      <style jsx global>{`
+        @keyframes float {
+          0%, 100% { 
+            transform: translate(0, 0) scale(1); 
+            opacity: 0.3; 
+          }
+          50% { 
+            transform: translate(-10px, -20px) scale(1.2); 
+            opacity: 0.8; 
+          }
+        }
+        
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        .animate-float {
+          animation: float 5s ease-in-out infinite;
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 8s ease infinite;
+        }
+      `}</style>
+    </section>
+  )
+}
+  

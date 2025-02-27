@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(auth)/sign-in/[[...sign-in]]/page.jsx", "app/dashboard/_components/AddNewInterview.jsx", "app/page.jsx", "app/layout.tsx", "app/dashboard/interview/[interviewId]/feedback/page.jsx", "app/dashboard/_components/GeneratePDFButton.jsx", "app/(auth)/sign-up/[[...sign-up]]/page.jsx"],
   "exclude": ["node_modules"]
 }
