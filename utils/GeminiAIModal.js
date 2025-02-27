@@ -2,6 +2,7 @@ const {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   } = require("@google/generative-ai");
   
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
