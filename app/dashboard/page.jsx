@@ -8,9 +8,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTheme } from 'next-themes';
-
+import {Link} from 'next/link';
+import { useRouter } from 'next/navigation';
 function Dashboard() {
   const { setTheme, theme } = useTheme();
+const router = useRouter();
   
   // Sample stats for the dashboard
   const stats = [
@@ -77,12 +79,22 @@ function Dashboard() {
             <CardDescription>Start a practice session or schedule an interview</CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Button className="w-full" size="lg">
-              <LayoutDashboardIcon className="mr-2 h-4 w-4" /> Quick Practice
-            </Button>
-            <Button variant="outline" className="w-full" size="lg">
-              <CalendarIcon className="mr-2 h-4 w-4" /> Schedule Session
-            </Button>
+      
+    
+        <Button  onClick={() => router.push('/dashboard/quick-practice')}  className="w-full" size="lg">
+        
+            <LayoutDashboardIcon className="mr-2 h-4 w-4" /> Quick Practice
+          
+        </Button>
+   
+     
+        <Button onClick={() => router.push('/dashboard/schedule-session')}  variant="outline" className="w-full" size="lg">
+        
+            <CalendarIcon className="mr-2 h-4 w-4" /> Schedule Session
+          
+        </Button>
+     
+    
           </CardContent>
         </Card>
         
