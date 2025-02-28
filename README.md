@@ -132,7 +132,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-Project Link: [https://github.com/yourusername/intervue-ai](https://github.com/gauravsingh906/intervue-ai)
+Project Link: [https://github.com/gauravsingh906/intervue-ai](https://github.com/gauravsingh906/intervue-ai)
 
 ## 🙏 Acknowledgements
 
