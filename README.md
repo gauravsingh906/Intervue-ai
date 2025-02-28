@@ -1,15 +1,13 @@
 # Intervue AI
 
 <div align="center">
-  <img src="/public/assets/logo.png" alt="Intervue AI Logo" width="200" />
+
   
   <p>
     <b>AI-Powered Interview Platform for Modern Recruiting</b>
   </p>
   
-  <p>
-    <a href="https://intervue-ai.vercel.app/"><strong>Live Demo »</strong></a>
-  </p>
+  
   
   <p>
     <a href="https://github.com/yourusername/intervue-ai/issues">Report Bug</a>
