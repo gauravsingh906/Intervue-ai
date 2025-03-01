@@ -27,9 +27,10 @@ import {
   MessageSquare, 
   HelpCircle, 
   LifeBuoy, 
-  Briefcase,
+ 
   CheckCircle
 } from "lucide-react";
+import { BriefcaseBusiness } from 'lucide-vue-next';
 import {
   Select,
   SelectContent,
@@ -172,7 +173,7 @@ const ContactPage = () => {
                 <span>Support</span>
               </TabsTrigger>
               <TabsTrigger value="business" className="flex items-center gap-2">
-                <Briefcase className="h-4 w-4" />
+                < BriefcaseBusiness className="h-4 w-4" />
                 <span>Business</span>
               </TabsTrigger>
             </TabsList>
