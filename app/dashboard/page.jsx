@@ -81,14 +81,14 @@ const router = useRouter();
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
       
     
-        <Button   className="w-full" size="lg">
+        <Button  onClick={() => router.push('/dashboard/quick-practice')}  className="w-full" size="lg">
         
             <LayoutDashboardIcon className="mr-2 h-4 w-4" /> Quick Practice
           
         </Button>
    
      
-        <Button   variant="outline" className="w-full" size="lg">
+        <Button onClick={() => router.push('/dashboard/schedule-session')}  variant="outline" className="w-full" size="lg">
         
             <CalendarIcon className="mr-2 h-4 w-4" /> Schedule Session
           
@@ -110,11 +110,11 @@ const router = useRouter();
         </TabsContent>
         
         <TabsContent value="completed">
-          <InterviewList filter="completed" />
+          <InterviewList  />
         </TabsContent>
         
         <TabsContent value="scheduled">
-          <InterviewList filter="scheduled" />
+          <InterviewList  />
         </TabsContent>
       </Tabs>
     </div>
