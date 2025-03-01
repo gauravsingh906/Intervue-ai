@@ -105,17 +105,7 @@ const router = useRouter();
       <Tabs defaultValue="all" className="w-full">
       
         
-        <TabsContent value="all">
-          <InterviewList />
-        </TabsContent>
-        
-        <TabsContent value="completed">
-          <InterviewList  />
-        </TabsContent>
-        
-        <TabsContent value="scheduled">
-          <InterviewList  />
-        </TabsContent>
+      
       </Tabs>
     </div>
   );
