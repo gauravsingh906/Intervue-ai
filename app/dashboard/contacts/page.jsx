@@ -19,17 +19,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { 
-
   Mail, 
   MapPin, 
   Phone, 
   MessageSquare, 
   HelpCircle, 
-  LifeBuoy, 
- 
-  CheckCircle
+  LifeBuoy,
+  CheckCircle,
+  Briefcase // Using Briefcase instead of BriefcaseBusiness
 } from "lucide-react";
-import { BriefcaseBusiness } from 'lucide-vue-next';
+// Removed import { BriefcaseBusiness } from 'lucide-vue-next';
 import {
   Select,
   SelectContent,
@@ -79,8 +78,16 @@ const ContactPage = () => {
 
   function onSubmit(values) {
     setIsSubmitting(true);
-    
-  
+    // Adding the timeout to simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      console.log(values);
+      toast({
+        title: "Message Sent!",
+        description: "We've received your message and will get back to you soon.",
+      });
+    }, 1500);
   }
 
   const contactInfo = [
@@ -160,7 +167,7 @@ const ContactPage = () => {
                 <span>Support</span>
               </TabsTrigger>
               <TabsTrigger value="business" className="flex items-center gap-2">
-                < BriefcaseBusiness className="h-4 w-4" />
+                <Briefcase className="h-4 w-4" /> 
                 <span>Business</span>
               </TabsTrigger>
             </TabsList>
@@ -481,5 +488,8 @@ const ContactPage = () => {
         </Tabs>
         
       </div>
-    </div>)}
-    export default ContactPage
+    </div>
+  );
+};
+
+export default ContactPage;
