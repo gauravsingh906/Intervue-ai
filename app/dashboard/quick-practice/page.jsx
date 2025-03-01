@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -362,7 +363,7 @@ const QuickPractice = () => {
                     <p>Can you explain this in detail? I'm particularly interested in your understanding of how React's rendering optimization works in practice.</p>
                   </div>
                   
-                  <Textarea 
+                  <Textarea
                     placeholder="Type your answer here..." 
                     className="min-h-32"
                   />
