@@ -81,14 +81,14 @@ const router = useRouter();
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
       
     
-        <Button  onClick={() => router.push('/dashboard/quick-practice')}  className="w-full" size="lg">
+        <Button   className="w-full" size="lg">
         
             <LayoutDashboardIcon className="mr-2 h-4 w-4" /> Quick Practice
           
         </Button>
    
      
-        <Button onClick={() => router.push('/dashboard/schedule-session')}  variant="outline" className="w-full" size="lg">
+        <Button   variant="outline" className="w-full" size="lg">
         
             <CalendarIcon className="mr-2 h-4 w-4" /> Schedule Session
           
