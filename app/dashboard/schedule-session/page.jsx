@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon, Clock, ArrowLeft, Users, Briefcase, List } from 'lucide-react';
+import { CalendarIcon, Clock, ArrowLeft, Users, List } from 'lucide-react';
+import {  BriefcaseBusiness } from 'lucide-vue-next';
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -135,7 +137,7 @@ const ScheduleSession = () => {
                       onClick={() => setInterviewType(type.id)}
                     >
                       <div className="flex items-center space-x-3">
-                        <Briefcase className={`h-5 w-5 ${interviewType === type.id ? 'text-primary' : 'text-muted-foreground'}`} />
+                        < BriefcaseBusiness className={`h-5 w-5 ${interviewType === type.id ? 'text-primary' : 'text-muted-foreground'}`} />
                         <span className="font-medium">{type.name}</span>
                       </div>
                     </div>
