@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTheme } from "next-themes";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -90,8 +90,7 @@ const ContactPage = () => {
         description: "We've received your message and will get back to you soon.",
       });
       
-      // Reset success state after 3 seconds
-      setTimeout(() => setIsSuccess(false), 3000);
+
     }, 1500);
   }
 
