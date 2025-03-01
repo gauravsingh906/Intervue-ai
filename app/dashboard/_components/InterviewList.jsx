@@ -5,7 +5,7 @@ import { useUser } from '@clerk/nextjs';
 import { desc, eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react';
 import InterviewItemCard from './InterviewItemCard';
-import { SearchCheck, BriefcaseBusiness } from 'lucide-react';
+import { SearchCheck, Briefcase } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
