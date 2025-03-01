@@ -80,18 +80,7 @@ const ContactPage = () => {
   function onSubmit(values) {
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      console.log(values);
-      toast({
-        title: "Message Sent!",
-        description: "We've received your message and will get back to you soon.",
-      });
-      
-
-    }, 1500);
+  
   }
 
   const contactInfo = [
