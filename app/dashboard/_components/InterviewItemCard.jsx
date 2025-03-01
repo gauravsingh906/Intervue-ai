@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { Calendar, Briefcase, Award, ArrowRight, BarChart2 } from 'lucide-react';
+import { Calendar,  Award, ArrowRight, BarChart2 } from 'lucide-react';
+import {  BriefcaseBusiness } from 'lucide-vue-next';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 
@@ -26,7 +27,7 @@ function InterviewItemCard({ interview }) {
           <div>
             <h2 className="font-bold text-lg text-primary">{interview?.jobPosition}</h2>
             <div className="flex items-center gap-1 text-sm text-gray-600 mt-1">
-              <Briefcase size={14} />
+              < BriefcaseBusiness size={14} />
               <span>{interview?.jobExperience} Years of Experience</span>
             </div>
           </div>

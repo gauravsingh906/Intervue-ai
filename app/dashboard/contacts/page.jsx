@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTheme } from "next-themes";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -19,17 +19,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { 
-  Sun, 
-  Moon, 
   Mail, 
   MapPin, 
   Phone, 
   MessageSquare, 
   HelpCircle, 
-  LifeBuoy, 
-  Briefcase,
-  CheckCircle
+  LifeBuoy,
+  CheckCircle,
+  Briefcase // Using Briefcase instead of BriefcaseBusiness
 } from "lucide-react";
+// Removed import { BriefcaseBusiness } from 'lucide-vue-next';
 import {
   Select,
   SelectContent,
@@ -60,7 +59,7 @@ const formSchema = z.object({
 });
 
 const ContactPage = () => {
-  const { theme, setTheme } = useTheme();
+ 
   const [activeTab, setActiveTab] = useState("contact-form");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -79,8 +78,7 @@ const ContactPage = () => {
 
   function onSubmit(values) {
     setIsSubmitting(true);
-    
-    // Simulate API call
+    // Adding the timeout to simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
@@ -89,9 +87,6 @@ const ContactPage = () => {
         title: "Message Sent!",
         description: "We've received your message and will get back to you soon.",
       });
-      
-      // Reset success state after 3 seconds
-      setTimeout(() => setIsSuccess(false), 3000);
     }, 1500);
   }
 
@@ -172,7 +167,7 @@ const ContactPage = () => {
                 <span>Support</span>
               </TabsTrigger>
               <TabsTrigger value="business" className="flex items-center gap-2">
-                <Briefcase className="h-4 w-4" />
+                <Briefcase className="h-4 w-4" /> 
                 <span>Business</span>
               </TabsTrigger>
             </TabsList>
@@ -493,5 +488,8 @@ const ContactPage = () => {
         </Tabs>
         
       </div>
-    </div>)}
-    export default ContactPage
+    </div>
+  );
+};
+
+export default ContactPage;

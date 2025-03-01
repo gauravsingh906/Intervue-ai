@@ -12,7 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { chatSession } from '@/utils/GeminiAIModal';
-import { LoaderCircle, Plus, FileSpreadsheet, BriefcaseBusiness, Clock, X } from 'lucide-react';
+import { LoaderCircle, Plus, FileSpreadsheet,  Clock, X } from 'lucide-react';
+import {  BriefcaseBusiness } from 'lucide-vue-next';
 import { db } from '@/utils/db';
 import { MockInterview } from '@/utils/schema';
 import { v4 as uuidv4 } from 'uuid';
@@ -114,7 +115,7 @@ function AddNewInterview() {
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="text-2xl flex items-center gap-2">
-              <BriefcaseBusiness className="text-primary" />
+              <  BriefcaseBusiness className="text-primary" />
               New Interview Session
             </DialogTitle>
             <DialogDescription>
@@ -229,7 +230,7 @@ function AddNewInterview() {
                       <h4 className="text-sm font-medium mb-2">Interview Summary</h4>
                       <div className="space-y-2">
                         <div className="flex items-center">
-                          <BriefcaseBusiness size={16} className="text-gray-500 mr-2" />
+                          <  BriefcaseBusiness size={16} className="text-gray-500 mr-2" />
                           <span className="text-sm">{jobPosition}</span>
                         </div>
                         <div className="flex items-center">
