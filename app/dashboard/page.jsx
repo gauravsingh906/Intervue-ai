@@ -110,11 +110,11 @@ const router = useRouter();
         </TabsContent>
         
         <TabsContent value="completed">
-          <InterviewList filter="completed" />
+          <InterviewList  />
         </TabsContent>
         
         <TabsContent value="scheduled">
-          <InterviewList filter="scheduled" />
+          <InterviewList  />
         </TabsContent>
       </Tabs>
     </div>

@@ -9,8 +9,7 @@ import { SearchCheck, BriefcaseBusiness } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-// Modified to accept a filter prop
-function InterviewList({ filter }) {
+function InterviewList() {
   const { user } = useUser();
   const [interviewList, setInterviewList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -26,7 +25,7 @@ function InterviewList({ filter }) {
     if (interviewList.length > 0) {
       applyFilters();
     }
-  }, [searchQuery, sortOrder, interviewList, filter]);
+  }, [searchQuery, sortOrder, interviewList]);
 
   const GetInterviewList = async () => {
     setLoading(true);
@@ -56,10 +55,6 @@ function InterviewList({ filter }) {
         item.jobDesc.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
-    // Apply status filter if provided
- 
-    // No filter needed for "all"
     
     // Apply sorting
     if (sortOrder === "newest") {
@@ -135,9 +130,7 @@ function InterviewList({ filter }) {
             </div>
             <h3 className="text-lg font-medium">No interviews found</h3>
             <p className="text-gray-500 mt-1">
-              {filter 
-                ? `No ${filter} interviews found.` 
-                : "Try adjusting your search or create a new interview session."}
+              Try adjusting your search or create a new interview session.
             </p>
           </div>
         )}
