@@ -58,11 +58,7 @@ function InterviewList({ filter }) {
     }
     
     // Apply status filter if provided
-    if (filter === "completed") {
-      filtered = filtered.filter(item => item.status === "completed");
-    } else if (filter === "scheduled") {
-      filtered = filtered.filter(item => item.status === "scheduled");
-    }
+ 
     // No filter needed for "all"
     
     // Apply sorting
