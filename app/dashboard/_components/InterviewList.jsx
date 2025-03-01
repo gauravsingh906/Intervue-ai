@@ -5,14 +5,12 @@ import { useUser } from '@clerk/nextjs';
 import { desc, eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react';
 import InterviewItemCard from './InterviewItemCard';
-import AddNewInterview from './AddNewInterview';
-import { MagnetIcon, MagnifyingGlassIcon, SearchCheck } from 'lucide-react';
-import { BriefcaseBusiness } from 'lucide-vue-next';
+import { SearchCheck, BriefcaseBusiness } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-function InterviewList() {
+// Modified to accept a filter prop
+function InterviewList({ filter }) {
   const { user } = useUser();
   const [interviewList, setInterviewList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -28,7 +26,7 @@ function InterviewList() {
     if (interviewList.length > 0) {
       applyFilters();
     }
-  }, [searchQuery, sortOrder, interviewList]);
+  }, [searchQuery, sortOrder, interviewList, filter]);
 
   const GetInterviewList = async () => {
     setLoading(true);
@@ -59,6 +57,14 @@ function InterviewList() {
       );
     }
     
+    // Apply status filter if provided
+    if (filter === "completed") {
+      filtered = filtered.filter(item => item.status === "completed");
+    } else if (filter === "scheduled") {
+      filtered = filtered.filter(item => item.status === "scheduled");
+    }
+    // No filter needed for "all"
+    
     // Apply sorting
     if (sortOrder === "newest") {
       filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -74,7 +80,7 @@ function InterviewList() {
   };
 
   return (
-    <div className="space-y-6 my-12">
+    <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between gap-4 items-center">
         <h1 className="text-2xl font-bold">My Interview Sessions</h1>
         <div className="flex gap-3 w-full md:w-auto">
@@ -101,71 +107,45 @@ function InterviewList() {
         </div>
       </div>
       
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="mb-4">
-          <TabsTrigger value="all">All Interviews</TabsTrigger>
-          <TabsTrigger value="recent">Recent</TabsTrigger>
-          <TabsTrigger value="completed">Completed</TabsTrigger>
-        </TabsList>
-        <TabsContent value="all" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          
-            
-            {!loading && filteredList.length > 0 ? (
-              filteredList.map((interview, index) => (
-                <InterviewItemCard 
-                  interview={interview}
-                  key={index} 
-                />
-              ))
-            ) : loading ? (
-              Array(3).fill(0).map((_, index) => (
-                <div key={index} className="rounded-lg border">
-                  <div className="h-8 w-2/3 bg-gray-200 animate-pulse rounded m-4"></div>
-                  <div className="h-4 w-1/2 bg-gray-200 animate-pulse rounded mx-4 mb-2"></div>
-                  <div className="h-4 w-1/3 bg-gray-200 animate-pulse rounded mx-4 mb-4"></div>
-                  <div className="flex gap-2 mx-4 mb-4">
-                    {Array(3).fill(0).map((_, i) => (
-                      <div key={i} className="h-6 w-16 bg-gray-200 animate-pulse rounded"></div>
-                    ))}
-                  </div>
-                  <div className="flex justify-between border-t p-4">
-                    <div className="h-8 w-24 bg-gray-200 animate-pulse rounded"></div>
-                    <div className="h-8 w-24 bg-gray-200 animate-pulse rounded"></div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full py-10 text-center">
-                <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                  < BriefcaseBusiness size={36} className="text-gray-400" />
-                </div>
-                <h3 className="text-lg font-medium">No interviews found</h3>
-                <p className="text-gray-500 mt-1">Try adjusting your search or create a new interview session.</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {!loading && filteredList.length > 0 ? (
+          filteredList.map((interview, index) => (
+            <InterviewItemCard 
+              interview={interview}
+              key={index} 
+            />
+          ))
+        ) : loading ? (
+          Array(3).fill(0).map((_, index) => (
+            <div key={index} className="rounded-lg border">
+              <div className="h-8 w-2/3 bg-gray-200 animate-pulse rounded m-4"></div>
+              <div className="h-4 w-1/2 bg-gray-200 animate-pulse rounded mx-4 mb-2"></div>
+              <div className="h-4 w-1/3 bg-gray-200 animate-pulse rounded mx-4 mb-4"></div>
+              <div className="flex gap-2 mx-4 mb-4">
+                {Array(3).fill(0).map((_, i) => (
+                  <div key={i} className="h-6 w-16 bg-gray-200 animate-pulse rounded"></div>
+                ))}
               </div>
-            )}
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="recent">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {!loading && filteredList.length > 0 ? 
-              filteredList.slice(0, 3).map((interview, index) => (
-                <InterviewItemCard interview={interview} key={index} />
-              )) : 
-              <div className="col-span-full py-10 text-center">
-                <p className="text-gray-500">No recent interviews found.</p>
+              <div className="flex justify-between border-t p-4">
+                <div className="h-8 w-24 bg-gray-200 animate-pulse rounded"></div>
+                <div className="h-8 w-24 bg-gray-200 animate-pulse rounded"></div>
               </div>
-            }
+            </div>
+          ))
+        ) : (
+          <div className="col-span-full py-10 text-center">
+            <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+              <BriefcaseBusiness size={36} className="text-gray-400" />
+            </div>
+            <h3 className="text-lg font-medium">No interviews found</h3>
+            <p className="text-gray-500 mt-1">
+              {filter 
+                ? `No ${filter} interviews found.` 
+                : "Try adjusting your search or create a new interview session."}
+            </p>
           </div>
-        </TabsContent>
-        
-        <TabsContent value="completed">
-          <div className="text-center py-10">
-            <p className="text-gray-500">This feature is coming soon.</p>
-          </div>
-        </TabsContent>
-      </Tabs>
+        )}
+      </div>
     </div>
   );
 }
