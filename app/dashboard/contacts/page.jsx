@@ -19,8 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { 
-  Sun, 
-  Moon, 
+
   Mail, 
   MapPin, 
   Phone, 
@@ -61,7 +60,7 @@ const formSchema = z.object({
 });
 
 const ContactPage = () => {
-  const { theme, setTheme } = useTheme();
+ 
   const [activeTab, setActiveTab] = useState("contact-form");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
