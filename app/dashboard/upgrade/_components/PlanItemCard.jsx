@@ -49,6 +49,7 @@ function PlanItemCard({ plan, isPopular }) {
           )}
           variant={isPopular ? "default" : "outline"}
           size="lg"
+          onClick={() => {window.location.href = `${plan.paymentLink}`}}
         >
           {user ? "Get Started" : "Sign Up & Start"}
           {isPopular && <Sparkles className="ml-2 h-4 w-4" />}
