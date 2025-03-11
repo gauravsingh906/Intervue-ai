@@ -1,10 +1,13 @@
 "use client";
 import { Lightbulb, Volume2 } from "lucide-react";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-function QuestionsSection({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex }) {
+function QuestionsSection({ mockInterviewQuestion = [], activeQuestionIndex, setActiveQuestionIndex }) {
+  // Ensure mockInterviewQuestion is always an array
+  const questions = Array.isArray(mockInterviewQuestion) ? mockInterviewQuestion : [];
+
   const textToSpeech = (text) => {
     if ("speechSynthesis" in window) {
       if (window.speechSynthesis.speaking) {
@@ -17,7 +20,7 @@ function QuestionsSection({ mockInterviewQuestion, activeQuestionIndex, setActiv
     }
   };
 
-  if (!mockInterviewQuestion || mockInterviewQuestion.length === 0) {
+  if (questions.length === 0) {
     return (
       <Card>
         <CardContent className="pt-6">
@@ -31,14 +34,12 @@ function QuestionsSection({ mockInterviewQuestion, activeQuestionIndex, setActiv
     <div className="space-y-6">
       {/* Question Navigation */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-        {mockInterviewQuestion.map((question, index) => (
+        {questions.map((question, index) => (
           <Badge
             key={index}
             variant={activeQuestionIndex === index ? "default" : "outline"}
             className={`py-1.5 cursor-pointer hover:opacity-90 transition-all ${
-              activeQuestionIndex === index 
-                ? "bg-primary text-primary-foreground" 
-                : ""
+              activeQuestionIndex === index ? "bg-primary text-primary-foreground" : ""
             }`}
             onClick={() => setActiveQuestionIndex && setActiveQuestionIndex(index)}
           >
@@ -53,9 +54,9 @@ function QuestionsSection({ mockInterviewQuestion, activeQuestionIndex, setActiv
           <h3 className="text-lg font-medium">Question {activeQuestionIndex + 1}</h3>
           <button
             onClick={() => {
-              const questionText = 
-                mockInterviewQuestion[activeQuestionIndex]?.question || 
-                mockInterviewQuestion[activeQuestionIndex]?.Question || 
+              const questionText =
+                questions[activeQuestionIndex]?.question || 
+                questions[activeQuestionIndex]?.Question || 
                 "No question available";
               textToSpeech(questionText);
             }}
@@ -68,8 +69,8 @@ function QuestionsSection({ mockInterviewQuestion, activeQuestionIndex, setActiv
 
         <div className="text-lg">
           {/* Display the question regardless of case (question or Question) */}
-          {mockInterviewQuestion[activeQuestionIndex]?.question || 
-           mockInterviewQuestion[activeQuestionIndex]?.Question || 
+          {questions[activeQuestionIndex]?.question || 
+           questions[activeQuestionIndex]?.Question || 
            "No question available"}
         </div>
       </div>

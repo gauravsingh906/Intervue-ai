@@ -2,7 +2,7 @@
 import { db } from '@/utils/db';
 import { MockInterview } from '@/utils/schema';
 import { eq } from 'drizzle-orm';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import QuestionsSection from './_components/QuestionsSection';
 import RecordAnswerSection from './_components/RecordAnswerSection';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,7 @@ function StartInterview({ params }) {
   const [mockInterviewQuestion, setMockInterviewQuestion] = useState();
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const {interviewId}= use(params);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
 
@@ -36,13 +37,11 @@ function StartInterview({ params }) {
     }
   }, [mockInterviewQuestion, loading]);
 
-  /**
-   * Used to Get Interview Details by MockId/Interview Id
-   */
+ 
   const GetInterviewDetails = async () => {
     try {
       const result = await db.select().from(MockInterview)
-        .where(eq(MockInterview.mockId, params.interviewId));
+        .where(eq(MockInterview.mockId, interviewId));
 
       if (result && result.length > 0) {
         const jsonMockResp = JSON.parse(result[0].jsonMockResp);
